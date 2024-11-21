@@ -1,30 +1,49 @@
-function add(){
-    const texttag=document.querySelector(".inputtask");
-    const text =texttag.value.trim();
+function add() {
+    const texttag = document.querySelector(".inputtask");
+    const text = texttag.value.trim();
 
-    if(text){
-        const l=document.querySelector(".tasklist");
-        const le=document.createElement("li");
+    if (text) {
+        const taskList = document.querySelector(".tasklist");
+        const taskItem = document.createElement("li");
 
-        le.textContent=text;
+        const taskText = document.createElement("span");
+        taskText.textContent = text;
 
-        le.addEventListener("click",()=>{
-            le.classList.toggle("completed");
+        taskItem.append(taskText);
+
+        // Add event to toggle completed class
+        taskItem.addEventListener("dblclick", () => {
+            taskItem.classList.toggle("completed");
         });
 
-        const del=document.createElement("button");
-        del.textContent="Delete";
-        del.classList.add("delete");
+        // Edit button
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.classList.add("edit");
 
-        del.addEventListener("click",()=>{
-            l.removeChild(le);
+        editBtn.addEventListener("click", () => {
+            const newText = prompt("Edit your task:", taskText.textContent);
+            if (newText !== null && newText.trim() !== "") {
+                taskText.textContent = newText.trim();
+            }
         });
 
-        l.append(le);
-        le.append(del);
+        // Delete button
+        const deleteBtn = document.createElement("button");
+        deleteBtn.textContent = "Delete";
+        deleteBtn.classList.add("delete");
 
-        texttag.value="";
-    }else{
+        deleteBtn.addEventListener("click", () => {
+            taskList.removeChild(taskItem);
+        });
+
+        taskItem.append(editBtn);
+        taskItem.append(deleteBtn);
+        taskList.append(taskItem);
+
+        // Clear input field
+        texttag.value = "";
+    } else {
         alert("Enter a task");
     }
 }

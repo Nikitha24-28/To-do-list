@@ -55,6 +55,13 @@ li{
     text-align: left;
     font-weight: bolder;
 }
+.edit{
+    height: 40px;
+    width: 55px;
+    border-radius: 5px;
+    background-color: #E4B1F0;
+    margin-left:200px ;
+}
 .delete{
     height: 40px;
     width: 55px;
